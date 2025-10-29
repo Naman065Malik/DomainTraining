@@ -2,7 +2,7 @@
 #include "Array.h"
 
 int main(){
-    int n;
+    int n, loc, item;
     printf("Please Enter The Size of the Array: ");
     scanf("%d", &n);
 
@@ -10,8 +10,7 @@ int main(){
     initArray(arr,n);
     printf("Original Array\n");
     printArray(arr,n);
-    reverseArray(arr,n);
-    printf("Array After Reversing\n");
+    quickSort(arr,0,n-1);
     printArray(arr,n);
 
     return 0;
