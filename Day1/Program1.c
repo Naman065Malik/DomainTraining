@@ -10,7 +10,7 @@ int main(){
     initArray(arr,n);
     printf("Original Array\n");
     printArray(arr,n);
-    quickSort(arr,0,n-1);
+    heapSort(arr,n);
     printArray(arr,n);
 
     return 0;

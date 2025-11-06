@@ -6,6 +6,20 @@ void reverseArray(int arr[], int size){
     }
 }
 
+void swap(int *a, int *b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// rightShift by k times
+// ALGO
+//     rotate(arr)
+//     rotate(arr,start,k-1)
+//     rotate(arr,k,end)
+
+// void rotate
+
 void initArray(int arr[], int size){
     printf("Please Enter %d Numbers to create an Array: ",size);
     for(int i = 0; i<size; i++)
@@ -73,4 +87,68 @@ void quickSort(int arr[], int low, int high){
         quickSort(arr,low,idx);
         quickSort(arr,idx+1,high);
     }
+}
+
+void merge(int arr[], int low, int mid, int high){
+    int i = low;
+    int j = mid + 1;
+    int k = 0;
+
+    int temp[high - low + 1];
+
+    while(i <= mid && j<= high){
+        if(arr[i] <= arr[j])
+            temp[k++] = arr[i++];
+        else
+            temp[k++] = arr[j++];
+    }
+
+    while(i <= mid)
+        temp[k++] = arr[i++];
+
+    while(j <= high)
+        temp[k++] = arr[j++];
+
+
+    i = low, k = 0;
+    while(i<=high)
+        arr[i++] = temp[k++];
+    
+}
+
+void mergeSort(int arr[], int low, int high){
+    if(low<high){
+        int mid = (low + high) / 2;
+        mergeSort(arr,low,mid);
+        mergeSort(arr,mid+1,high);
+        merge(arr,low,mid,high);
+    }
+}
+
+void heapify(int arr[], int size, int i){
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if(left < size && arr[left] > arr[largest])
+        largest = left;
+
+    if(right < size && arr[right] > arr[largest])
+        largest = right;
+
+    if(largest != i){
+        swap(&arr[i], &arr[largest]);
+        heapify(arr,size,largest);
+    }
+}
+
+void heapSort(int arr[], int size){
+    for(int i = size / 2; i >= 0; i--)
+        heapify(arr,size,i);
+
+    for(int i = size -1; i > 0; i--){
+        swap(&arr[0], &arr[i]);
+        heapify(arr,i,0);
+    }
+
 }
